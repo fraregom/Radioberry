@@ -13,3 +13,5 @@ print "Las canciones favoritas de la gente:"
 results = spotify.search(q=str(name), limit=10)
 for i, t in enumerate(results['tracks']['items']):
     print ' ', (i+1), t['name']
+
+raw_input()
