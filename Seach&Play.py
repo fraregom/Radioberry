@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import spotipy
 import spotify
 import unicodedata
@@ -15,22 +16,21 @@ print "\n\n","-----------------------------------------------------------------"
 cancion=raw_input("Ingresa el nombre de la cancion que quieres escuchar: ")
 print "\n\n"
 results = spotipy.search(cancion, limit=10)
-play_song = ""
-on = ""
-cont = True
+songs = {}
+cont = 1
 for i in results['tracks']['items']:
-    if cont == True:
-        play_song = str(i["uri"])
-        on = unicodedata.normalize("NFKD",i['name']).encode("ascii","ignore")+" de "+ unicodedata.normalize("NFKD",i["artists"][0]["name"]).encode("ascii","ignore") 
-        cont = False
-    print i['name'],"de",i["artists"][0]["name"],"\n"#i["external_urls"]["spotify"]+"\n"#nombre,artista,url cancion
-
+    on = unicodedata.normalize("NFKD",i['name']).encode("ascii","ignore")+" de "+ unicodedata.normalize("NFKD",i["artists"][0]["name"]).encode("ascii","ignore")
+    songs[str(cont)] = {"play_song":str(i["uri"]),"name":on,"image":i['album']['images'][1]['url']}
+    print str(cont)+".-"+ i['name'],"de",i["artists"][0]["name"]
+    cont += 1
+play = raw_input("\n\n¿Cual Quieres escuchar?: ")
 audio = spotify.AlsaSink(session)
-track = session.get_track(play_song)
+track = session.get_track(songs[play]["play_song"])
 track.load()
 session.player.load(track)
 session.player.play()
-print "\n\n","########## Estas escuchando ",on,"##########"
+print "\n\n","########## Estas escuchando ",songs[play]["name"],"##########"
+print songs[play]["image"]
 raw_input()
 
 
