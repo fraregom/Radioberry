@@ -18,7 +18,7 @@ lista_radio = []
 DicPlay=dict()
 DicBuscar=dict()
 session = spotify.Session()
-session.login('radioberry','qszwax12')
+session.login('USER','PASSWORD')
 
 def Buscar():
 	if Radios[-1] == "Cancion":		

@@ -15,7 +15,7 @@ def connect_spotify(session,cox):
                                 print "Conectado"
                                 break
         else:
-                session.login('radioberry','qszwax12')
+                session.login('USER','PASSWORD')
                 print "Conectando......."
                 while True:
                         session.process_events()
